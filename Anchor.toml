@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "./programs/socha"
+]
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
