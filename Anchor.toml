@@ -1,6 +1,7 @@
 [workspace]
 members = [
-    "./programs/socha"
+    "./programs/socha",
+	"./programs/airdrop",
 ]
 
 [provider]
