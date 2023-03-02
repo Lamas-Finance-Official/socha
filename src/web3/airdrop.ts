@@ -60,6 +60,8 @@ export async function requestAirdrop({
 		signTransaction
 	});
 
-	const trans = await connection.getTransaction(tx);
-	console.info(`Transaction 'requestAirdrop'`, trans?.meta?.logMessages);
+	await connection.getTransaction(tx, {
+		commitment: 'finalized',
+		maxSupportedTransactionVersion: undefined
+	});
 }
