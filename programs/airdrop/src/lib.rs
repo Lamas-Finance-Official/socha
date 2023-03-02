@@ -34,7 +34,7 @@ mod anchor_airdrop_program {
                     authority: ctx.accounts.program_state.to_account_info(),
                 },
             )
-            .with_signer(&[&[PDA_AUTHORITY]]),
+            .with_signer(&[&[PDA_AUTHORITY, &[*ctx.bumps.get("program_state").unwrap()]]]),
             ctx.accounts.program_state.amount,
         )
     }
@@ -91,6 +91,8 @@ pub struct Update<'info> {
 
 #[derive(Accounts)]
 pub struct Airdrop<'info> {
+    signer: Signer<'info>,
+
     #[account(mut, token::mint = pool.mint)]
     wallet: Account<'info, TokenAccount>,
 
