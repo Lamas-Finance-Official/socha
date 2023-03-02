@@ -1,4 +1,4 @@
-import { Connection, PublicKey, Transaction } from '@solana/web3.js';
+import { Connection, PublicKey } from '@solana/web3.js';
 import { SignerWalletAdapterProps } from '@solana/wallet-adapter-base';
 import { ASSOCIATED_TOKEN_PROGRAM_ID, createAssociatedTokenAccountInstruction, getAssociatedTokenAddress, TOKEN_PROGRAM_ID, getAccount, Account as TokenAccount } from '@solana/spl-token';
 import { COMMITMENT, MINT } from './consts';

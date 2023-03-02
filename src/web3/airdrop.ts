@@ -59,9 +59,4 @@ export async function requestAirdrop({
 		payer: owner,
 		signTransaction
 	});
-
-	await connection.getTransaction(tx, {
-		commitment: 'finalized',
-		maxSupportedTransactionVersion: undefined
-	});
 }

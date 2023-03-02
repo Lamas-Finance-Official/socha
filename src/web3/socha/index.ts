@@ -203,19 +203,12 @@ export class SochaActions {
 
 	private async _signAndSend(ix: TransactionInstruction): Promise<string> {
 		try {
-			const tx = await signAndSend({
+			return await signAndSend({
 				instruction: [ix],
 				payer: this.owner,
 				connection: this.connection,
 				signTransaction: this.signTransaction,
 			});
-
-			await this.connection.getTransaction(tx, {
-				commitment: 'confirmed',
-				maxSupportedTransactionVersion: undefined,
-			});
-
-			return tx;
 		} catch (err) {
 			console.log(err, (err as any).logs);
 			return '';
