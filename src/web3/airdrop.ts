@@ -30,8 +30,6 @@ const [AIRDROP_POOL, __] = utils.publicKey.findProgramAddressSync(
 	AIRDROP_PROGRAM_ID,
 );
 
-console.log(AIRDROP_POOL.toBase58());
-
 export async function requestAirdrop({
 	owner, tokenAccount, connection, signTransaction
 }: {

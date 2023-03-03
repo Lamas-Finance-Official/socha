@@ -2,19 +2,15 @@ import { FunctionComponent } from 'react';
 import Head from 'next/head';
 import { Wallet } from './Wallet';
 
-import style from '~/styles/Layout.module.scss';
-
-const Layout: FunctionComponent<{ children: JSX.Element; search?: string }> = ({ children, search }) => {
+const Layout: FunctionComponent<{ children: JSX.Element; className: string }> = ({ children, className }) => {
 	return (
 		<>
 			<Head>
 				<title>Socha</title>
 			</Head>
-			<main>
-				<Wallet>
-					{children}
-				</Wallet>
-			</main>
+			<div className={className}>
+				<Wallet>{children}</Wallet>
+			</div>
 		</>
 	);
 };

@@ -1,0 +1,101 @@
+header.stickyNav {
+	width: 100%;
+
+	display: flex;
+	justify-content: space-between;
+
+	.leftNav {
+		display: flex;
+
+		.logo {
+			color: orange;
+			padding-right: 8px;
+			border-right: 1px solid #cccccc;
+		}
+
+		a {
+			padding: 4px;
+			margin: 4px;
+		}
+	}
+
+	.rightNav {
+		&>button:first-child {
+			border: 0;
+			background: none;
+			color: var(--blue-grey-500);
+		}
+	}
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.raiseAFund {
+	padding: 8px 18px;
+	color: #ffffff;
+	background-color: var(--primary-700);
+
+	border-radius: 10px;
+}
+
+.page {
+	height: 100vh;
+	width: 100%;
+}
+
+.page0 {
+	display: flex;
+
+	.content {
+		padding: 100px 180px;
+
+		.bigQuote {
+			font-size: 64px;
+			font-weight: bold;
+			margin-bottom: 18px;
+		}
+
+		.smallQuote {
+			color: var(--blue-grey-500);
+			font-size: 18px;
+			margin-bottom: 32px;
+		}
+	}
+
+	.graphic {
+		width: 60%;
+	}
+}
+
+.page1 {
+	display: flex;
+}
+
+.campaignCard {
+	.thumbnail {
+
+	}
+
+	.title {
+
+	}
+
+	.pubkey {
+
+	}
+
+	.progressBar {
+
+	}
+
+	.progress {
+
+	}
+
+	.footer {
+
+	}
+}

@@ -5,12 +5,39 @@ import { Connection, Keypair, PublicKey, SystemProgram, TransactionInstruction }
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import type { AnchorSochaProgram } from '~/idl/anchor_socha_program';
 import { SOCHA_PROGRAM_STATE, sochaProgram, sochaRoundWallet, sochaRound } from './program';
+import { bufferToString } from './bufferToString';
 import { signAndSend } from '../transaction';
 import { MINT } from '../consts';
 
-export type SochaRound = Awaited<ReturnType<Program<AnchorSochaProgram>['account']['sochaRound']['fetch']>>;
-export type SochaDonation = Awaited<ReturnType<Program<AnchorSochaProgram>['account']['sochaDonation']['fetch']>>;
-export type SochaState = Awaited<ReturnType<Program<AnchorSochaProgram>['account']['programState']['fetch']>>;
+type SochaProgramRound = Awaited<ReturnType<Program<AnchorSochaProgram>['account']['sochaRound']['fetch']>>;
+type SochaProgramDonation = Awaited<ReturnType<Program<AnchorSochaProgram>['account']['sochaDonation']['fetch']>>;
+type SochaProgramState = Awaited<ReturnType<Program<AnchorSochaProgram>['account']['programState']['fetch']>>;
+
+export type SochaCampaign = {
+	pubkey: PublicKey;
+	authority: PublicKey;
+	wallet: PublicKey;
+	targetAmount: number;
+	currentAmount: number;
+	thumbnail: string;
+	title: string;
+	summary: string;
+	description: string;
+	closed: boolean;
+	roundIdx: number;
+	timestampOpen: number;
+	timestampClose: number;
+	timestampPlannedClose: number;
+}
+
+export type SochaDonation = {
+	pubkey: PublicKey;
+	round: PublicKey;
+	name: string;
+	message: string;
+	amount: number;
+	timestamp: number;
+}
 
 export class SochaActions {
 	private owner: PublicKey;
@@ -37,19 +64,47 @@ export class SochaActions {
 		this.program = sochaProgram(connection);
 	}
 
-	getRound(roundPubkey: PublicKey): Promise<SochaRound> {
-		return this.program.account.sochaRound.fetch(roundPubkey);
+	getRound(roundPubkey: PublicKey): Promise<SochaCampaign> {
+		return this.program.account.sochaRound.fetch(roundPubkey)
+			.then(round => ({
+				pubkey: roundPubkey,
+				authority: round.authority,
+				wallet: round.wallet,
+				targetAmount: round.targetAmount.toNumber(),
+				currentAmount: round.currentAmount.toNumber(),
+				thumbnail: bufferToString(round.thumbnail),
+				title: bufferToString(round.title),
+				summary: bufferToString(round.summary),
+				description: bufferToString(round.description),
+				closed: round.state !== 0,
+				roundIdx: round.roundIdx.toNumber(),
+				timestampOpen: round.timestampOpen.toNumber(),
+				timestampClose: round.timestampClose.toNumber(),
+				timestampPlannedClose: round.timestampPlannedClose.toNumber(),
+			}));
 	}
 
-	getAllRounds(): Promise<(SochaRound & { pubkey: PublicKey })[]> {
+	getAllRounds(): Promise<SochaCampaign[]> {
 		return this.program.account.sochaRound.all()
 			.then(rounds => rounds.map(round => ({
-				...round.account,
 				pubkey: round.publicKey,
+				authority: round.account.authority,
+				wallet: round.account.wallet,
+				targetAmount: round.account.targetAmount.toNumber(),
+				currentAmount: round.account.currentAmount.toNumber(),
+				thumbnail: bufferToString(round.account.thumbnail),
+				title: bufferToString(round.account.title),
+				summary: bufferToString(round.account.summary),
+				description: bufferToString(round.account.description),
+				closed: round.account.state !== 0,
+				roundIdx: round.account.roundIdx.toNumber(),
+				timestampOpen: round.account.timestampOpen.toNumber(),
+				timestampClose: round.account.timestampClose.toNumber(),
+				timestampPlannedClose: round.account.timestampPlannedClose.toNumber(),
 			})));
 	}
 
-	getAllDonations(round: PublicKey): Promise<(SochaDonation & { pubkey: PublicKey })[]> {
+	getAllDonations(round: PublicKey): Promise<SochaDonation[]> {
 		return this.program.account.sochaDonation.all([
 			{
 				memcmp: {
@@ -58,8 +113,12 @@ export class SochaActions {
 				}
 			}
 		]).then(donations => donations.map(donation => ({
-			...donation.account,
 			pubkey: donation.publicKey,
+			round: donation.account.round,
+			name: bufferToString(donation.account.name),
+			message: bufferToString(donation.account.message),
+			amount: donation.account.amount.toNumber(),
+			timestamp: donation.account.timestamp.toNumber(),
 		})));
 	}
 
@@ -197,7 +256,7 @@ export class SochaActions {
 		return this._signAndSend(ix);
 	}
 
-	private async _programState(): Promise<SochaState> {
+	private async _programState(): Promise<SochaProgramState> {
 		return await this.program.account.programState.fetch(SOCHA_PROGRAM_STATE);
 	}
 
