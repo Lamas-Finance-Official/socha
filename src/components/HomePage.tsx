@@ -52,30 +52,59 @@ import { Keypair } from '@solana/web3.js';
 // 	);
 // };
 
-const cards: any[] = [
+type Contributor = {
+	avatar: string;
+	name: string;
+	amount: number;
+};
+
+const campaigns: any[] = [
 	{
-		targetAmount: 2500,
-		currentAmount: 4000,
+		targetAmount: 4000,
+		currentAmount: 2500,
 		title: 'Help 4 woman of color attend a higher education in Africa',
 		thumbnail: '',
 	},
 	{
-		targetAmount: 2500,
-		currentAmount: 4000,
+		targetAmount: 4000,
+		currentAmount: 100,
 		title: 'Grant to fund reforestation in Agogo',
 		thumbnail: '',
 	},
 	{
-		targetAmount: 2500,
-		currentAmount: 4000,
+		targetAmount: 5000,
+		currentAmount: 2000,
 		title: 'Project proposal: develop AI chatbots to help prevent suicide',
 		thumbnail: '',
 	},
 	{
-		targetAmount: 2500,
-		currentAmount: 4000,
+		targetAmount: 5000,
+		currentAmount: 4400,
 		title: 'Grant proposal: pair a veteran with a service dog to treat PTSD',
 		thumbnail: '',
+	},
+];
+
+const contributors: Contributor[] = [
+	{
+		avatar: '',
+		name: 'Sahin Ozdemir',
+		amount: 12500
+	},
+	{
+		avatar: '',
+		name: 'Osman Yildirim',
+		amount: 11500
+	},
+	{
+		avatar: '',
+		name: 'GNXBosvDTNNwAjNFHxoQP5CMrqtkyLohjETExdr84pQw',
+		amount: 10000
+	},
+	{
+		avatar: '',
+		name: 'Seyite Sansi',
+		amount: 7500
 	},
 ];
 
@@ -83,18 +112,20 @@ export const HomePage: FC = () => {
 	return (
 		<div className={styles.container}>
 			<header className={styles.stickyNav}>
-				<div className={styles.leftNav}>
-					<div className={styles.logo}>Socha</div>
-					<nav className={styles.nav}>
-						<Link href="/campaigns">Browse funding</Link>
-						<Link href="/faq">How it works</Link>
-						<Link href="/about">About us</Link>
-					</nav>
-				</div>
-				<div className={styles.rightNav}>
-					<button>Connect wallet</button>
-					<RaiseAFundBtn />
-				</div>
+				<div className={styles.content}>
+					<div className={styles.leftNav}>
+						<div className={styles.logo}>Socha</div>
+						<nav className={styles.nav}>
+							<Link href="/campaigns">Browse funding</Link>
+							<Link href="/faq">How it works</Link>
+							<Link href="/about">About us</Link>
+						</nav>
+					</div>
+					<div className={styles.rightNav}>
+						<button>Connect wallet</button>
+						<RaiseAFundBtn />
+					</div>
+				</div>				
 			</header>
 			<section className={cx(styles.page, styles.page0)}>
 				<div className={styles.content}>
@@ -116,8 +147,8 @@ export const HomePage: FC = () => {
 				<div className={styles.smallQuote}>
 					Meet some world-changing communities using Socha to raise money and make a difference.
 				</div>
-				<div className={styles.card}>
-					{cards.map((c) => (
+				<div className={styles.cards}>
+					{campaigns.map((c) => (
 						<CampaignCard key={c.title} round={c} />
 					))}
 				</div>
@@ -126,8 +157,68 @@ export const HomePage: FC = () => {
 				</div>
 			</section>
 			<section className={cx(styles.page, styles.page2)}></section>
-
-			<footer></footer>
+			<section className={cx(styles.page, styles.page3)}>
+				<div className={styles.bigQuote}>Top contributor</div>
+				<div className={styles.smallQuote}>
+					Users create campaigns and add information about their charitable cause. Each campaign is associated with a contract account, allowing for secure and transparent tracking of donations.
+				</div>
+				<div className={styles.cards}>
+					{
+						contributors.map((c) => (
+							<ContributorCard key={c.name} contributor={c} />
+						))
+					}
+				</div>
+			</section>
+			<section className={cx(styles.page, styles.page4)}>
+				<div className={styles.content}>
+					<div className={styles.bigQuote}>
+						<div>Donate crypto.</div>
+						<div>Change the world.</div>						
+					</div>
+					<div className={styles.smallQuote}>
+						Users create campaigns and add information about their charitable cause. Each campaign is associated with a contract account, allowing for secure and transparent tracking of donations.
+					</div>
+					<Link href="/" className={styles.contributorBtn}>Become a contributor</Link>
+				</div>
+				<div className={styles.graphic}>
+					<ul>
+						<li>Create campaigns, contribute using USDC</li>
+						<li>Transfer ownership of the campaigns</li>
+						<li>Disclose donation history and charitable profile</li>
+					</ul>
+				</div>
+			</section>
+			<footer className={styles.footer}>
+				<div className={styles.left}>
+					<div className={styles.icon}></div>
+					<div className={styles.content}>
+						<div className={styles.category}>
+							<h1>Solutions</h1>
+							<Link href='/'>Transparency</Link>
+							<Link href='/'>Crypto donations made simple</Link>
+							<Link href='/'>Inherit funding</Link>
+						</div>
+						<div className={styles.category}>
+							<h1>Funding</h1>
+							<Link href='/'>Communities</Link>
+							<Link href='/'>How to use</Link>
+							<Link href='/'>Become a Donor</Link>
+						</div>
+						<div className={styles.category}>
+							<h1>About Socha</h1>
+							<Link href='/'>About us</Link>
+							<Link href='/'>Meet the team</Link>
+						</div>
+					</div>
+				</div>
+				<div className={styles.right}>
+					<div className={styles.socials}></div>
+					<div>Do Better Together</div>
+					<div>Transparency for Community</div>
+					<RaiseAFundBtn />
+				</div>
+			</footer>
 		</div>
 	);
 };
@@ -141,21 +232,31 @@ const RaiseAFundBtn: FC = () => {
 	);
 };
 
-const CampaignCard: FC<{ round: SochaCampaign }> = ({ round }) => {
-	return (
-		<div className={styles.campaignCard}>
-			<img src={round.thumbnail} alt="campagin image" />
+const CampaignCard: FC<{ round: SochaCampaign }> = ({ round }) => (
+	<div className={styles.campaignCard}>
+		<img src={round.thumbnail} alt="campagin image" />
+		<div className={styles.content}>
 			<div className={styles.title}>{round.title}</div>
 			<div className={styles.pubkey}>{`GNXBosvDTNNwAjNFHxoQP5CMrqtkyLohjETExdr84pQw`}</div>
 			<div className={styles.progressBar}>
 				<div style={{ width: `${(round.currentAmount / round.targetAmount) * 100}%` }}></div>
 			</div>
 			<div className={styles.progress}>
-				<span>${round.currentAmount}</span>
+				<span>${round.currentAmount} </span>
 				funded of
-				<span>${round.targetAmount}</span>
+				<span> ${round.targetAmount}</span>
 			</div>
 			<div className={styles.footer}>Last donation few days ago</div>
 		</div>
-	);
-};
+	</div>
+);
+
+const ContributorCard: FC<{ contributor: Contributor }> = ({ contributor }) => (
+	<div className={styles.contributorCard}>
+		<img src={contributor.avatar} alt="contributor avatar" />
+		<div className={styles.content}>
+			<div className={styles.title}>{contributor.name}</div>
+			<div className={styles.progress}>{contributor.amount} USDC</div>
+		</div>
+	</div>
+)
