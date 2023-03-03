@@ -89,22 +89,22 @@ const contributors: Contributor[] = [
 	{
 		avatar: '',
 		name: 'Sahin Ozdemir',
-		amount: 12500
+		amount: 12500,
 	},
 	{
 		avatar: '',
 		name: 'Osman Yildirim',
-		amount: 11500
+		amount: 11500,
 	},
 	{
 		avatar: '',
 		name: 'GNXBosvDTNNwAjNFHxoQP5CMrqtkyLohjETExdr84pQw',
-		amount: 10000
+		amount: 10000,
 	},
 	{
 		avatar: '',
 		name: 'Seyite Sansi',
-		amount: 7500
+		amount: 7500,
 	},
 ];
 
@@ -125,7 +125,7 @@ export const HomePage: FC = () => {
 						<button>Connect wallet</button>
 						<RaiseAFundBtn />
 					</div>
-				</div>				
+				</div>
 			</header>
 			<section className={cx(styles.page, styles.page0)}>
 				<div className={styles.content}>
@@ -160,26 +160,28 @@ export const HomePage: FC = () => {
 			<section className={cx(styles.page, styles.page3)}>
 				<div className={styles.bigQuote}>Top contributor</div>
 				<div className={styles.smallQuote}>
-					Users create campaigns and add information about their charitable cause. Each campaign is associated with a contract account, allowing for secure and transparent tracking of donations.
+					Users create campaigns and add information about their charitable cause. Each campaign is associated
+					with a contract account, allowing for secure and transparent tracking of donations.
 				</div>
 				<div className={styles.cards}>
-					{
-						contributors.map((c) => (
-							<ContributorCard key={c.name} contributor={c} />
-						))
-					}
+					{contributors.map((c) => (
+						<ContributorCard key={c.name} contributor={c} />
+					))}
 				</div>
 			</section>
 			<section className={cx(styles.page, styles.page4)}>
 				<div className={styles.content}>
 					<div className={styles.bigQuote}>
 						<div>Donate crypto.</div>
-						<div>Change the world.</div>						
+						<div>Change the world.</div>
 					</div>
 					<div className={styles.smallQuote}>
-						Users create campaigns and add information about their charitable cause. Each campaign is associated with a contract account, allowing for secure and transparent tracking of donations.
+						Users create campaigns and add information about their charitable cause. Each campaign is
+						associated with a contract account, allowing for secure and transparent tracking of donations.
 					</div>
-					<Link href="/" className={styles.contributorBtn}>Become a contributor</Link>
+					<Link href="/" className={styles.contributorBtn}>
+						Become a contributor
+					</Link>
 				</div>
 				<div className={styles.graphic}>
 					<ul>
@@ -190,33 +192,43 @@ export const HomePage: FC = () => {
 				</div>
 			</section>
 			<footer className={styles.footer}>
-				<div className={styles.left}>
-					<div className={styles.icon}></div>
-					<div className={styles.content}>
-						<div className={styles.category}>
-							<h1>Solutions</h1>
-							<Link href='/'>Transparency</Link>
-							<Link href='/'>Crypto donations made simple</Link>
-							<Link href='/'>Inherit funding</Link>
-						</div>
-						<div className={styles.category}>
-							<h1>Funding</h1>
-							<Link href='/'>Communities</Link>
-							<Link href='/'>How to use</Link>
-							<Link href='/'>Become a Donor</Link>
-						</div>
-						<div className={styles.category}>
-							<h1>About Socha</h1>
-							<Link href='/'>About us</Link>
-							<Link href='/'>Meet the team</Link>
+				<div className={styles.nav}>
+					<div className={styles.left}>
+						<div className={styles.icon}></div>
+						<div className={styles.content}>
+							<div className={styles.category}>
+								<h1>Solutions</h1>
+								<Link href="/">Transparency</Link>
+								<Link href="/">Crypto donations made simple</Link>
+								<Link href="/">Inherit funding</Link>
+							</div>
+							<div className={styles.category}>
+								<h1>Funding</h1>
+								<Link href="/">Communities</Link>
+								<Link href="/">How to use</Link>
+								<Link href="/">Become a Donor</Link>
+							</div>
+							<div className={styles.category}>
+								<h1>About Socha</h1>
+								<Link href="/">About us</Link>
+								<Link href="/">Meet the team</Link>
+							</div>
 						</div>
 					</div>
+					<div className={styles.right}>
+						<div className={styles.socials}></div>
+						<div>Do Better Together</div>
+						<div>Transparency for Community</div>
+						<RaiseAFundBtn />
+					</div>
 				</div>
-				<div className={styles.right}>
-					<div className={styles.socials}></div>
-					<div>Do Better Together</div>
-					<div>Transparency for Community</div>
-					<RaiseAFundBtn />
+				<div className={styles.footnote}>
+					<div>Copyright @ 2023 Solcha | All Rights Reseved</div>
+					<div>
+						<Link href="/">Privacy policy</Link>
+						<Link href="/">Terms of services</Link>
+						<Link href="/">Cryto risk disclaimer</Link>
+					</div>
 				</div>
 			</footer>
 		</div>
@@ -259,4 +271,4 @@ const ContributorCard: FC<{ contributor: Contributor }> = ({ contributor }) => (
 			<div className={styles.progress}>{contributor.amount} USDC</div>
 		</div>
 	</div>
-)
+);

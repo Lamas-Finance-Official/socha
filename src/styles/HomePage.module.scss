@@ -2,7 +2,7 @@ header.stickyNav {
 	position: absolute;
 	width: 100%;
 
-	.content {			
+	.content {
 		display: flex;
 		margin: 24px 40px;
 
@@ -36,7 +36,7 @@ header.stickyNav {
 					font-size: 16px;
 					line-height: 28px;
 				}
-			}			
+			}
 		}
 
 		.rightNav {
@@ -66,7 +66,7 @@ header.stickyNav {
 	border-radius: 10px;
 }
 
-.contributorBtn {			
+.contributorBtn {
 	padding: 10px 16px;
 
 	font-size: 20px;
@@ -147,7 +147,7 @@ header.stickyNav {
 .page4 {
 	display: flex;
 	flex-direction: row;
-	
+
 	.content {
 		margin-top: 100px;
 		margin-left: 100px;
@@ -161,10 +161,10 @@ header.stickyNav {
 			font-size: 36px;
 			line-height: 48px;
 
-			color: #F24822;	
+			color: #F24822;
 			div:first-child {
 				color: #251638;
-			}			
+			}
 		}
 
 		.smallQuote {
@@ -182,15 +182,26 @@ header.stickyNav {
 	.graphic {
 		margin-top: 100px;
 		margin-left: 100px;
-		
+
 	}
 }
 
-.footer {
+footer.footer {
 	display: flex;
-	width: 100%;
-	flex-direction: row;
-	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+
+	background-color: #FEF6F0;
+	border-radius: 72px 72px 0px 0px;
+	padding: 48px 32px 0px 32px;
+
+	.nav {
+		display: flex;
+		width: 100%;
+		max-width: var(--design-width);
+		flex-direction: row;
+		justify-content: space-between;
+	}
 
 	.left {
 		display: flex;
@@ -212,6 +223,27 @@ header.stickyNav {
 		flex-direction: column;
 		text-align: right;
 	}
+
+	.footnote {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		color: rgba(71, 44, 106, 0.5);
+
+		width: 100%;
+		max-width: var(--design-width);
+
+		padding: 20px 0;
+		border-top: 2px solid rgba(71, 44, 106, 0.05);
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 16px;
+
+		a {
+			color: rgba(71, 44, 106, 0.5);
+			margin: 0 8px;
+		}
+	}
 }
 
 .campaignCard {
@@ -227,7 +259,7 @@ header.stickyNav {
 
 	img {
 		background-color: #2DAC18;
-		height: 276px;		
+		height: 276px;
 
 		border-radius: 16px;
 	}
@@ -260,7 +292,7 @@ header.stickyNav {
 
 		margin-bottom: 20px;
 	}
-	
+
 	.progressBar {
 		background-color: rgb(0, 0, 0, 0.05);
 		border-radius: 25px;
