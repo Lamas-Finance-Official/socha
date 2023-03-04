@@ -1,12 +1,13 @@
 import { FC, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 import { getOrCreateAssociatedTokenAccount, requestAirdrop, SochaCampaign } from '~/web3';
+import { Keypair } from '@solana/web3.js';
 import { cx } from '~/lib/cx';
 
 import styles from '~/styles/HomePage.module.scss';
-import { Keypair } from '@solana/web3.js';
 
 // export const HomePage: FC = () => {
 // 	const { connection } = useConnection();
@@ -114,7 +115,7 @@ export const HomePage: FC = () => {
 			<header className={styles.stickyNav}>
 				<div className={styles.content}>
 					<div className={styles.leftNav}>
-						<div className={styles.logo}>Socha</div>
+						<Logo />
 						<nav className={styles.nav}>
 							<Link href="/campaigns">Browse funding</Link>
 							<Link href="/faq">How it works</Link>
@@ -194,7 +195,7 @@ export const HomePage: FC = () => {
 			<footer className={styles.footer}>
 				<div className={styles.nav}>
 					<div className={styles.left}>
-						<div className={styles.icon}></div>
+						<Logo />
 						<div className={styles.content}>
 							<div className={styles.category}>
 								<h1>Solutions</h1>
@@ -234,6 +235,13 @@ export const HomePage: FC = () => {
 		</div>
 	);
 };
+
+const Logo: FC = () => (
+	<div className={styles.logo}>
+		<i className={styles.logoIcon}></i>
+		<span>Socha</span>
+	</div>
+);
 
 const RaiseAFundBtn: FC = () => {
 	return (

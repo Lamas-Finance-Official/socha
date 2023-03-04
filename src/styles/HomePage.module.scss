@@ -15,18 +15,10 @@ header.stickyNav {
 		.leftNav {
 			display: flex;
 
-			.logo {
-				font-weight: 800;
-				font-size: 22.4px;
-				line-height: 26px;
-				color: #FB8368;
-
-				padding-right: 16px;
-				border-right: 1px solid #cccccc;
-			}
-
 			.nav {
-				margin-left: 16px;
+				padding-left: 16px;
+				border-left: 1px solid #cccccc;
+				margin-left: 32px;
 
 				a {
 					padding: 4px;
@@ -50,6 +42,22 @@ header.stickyNav {
 				color: var(--blue-grey-500);
 			}
 		}
+	}
+}
+
+.logo {
+	font-weight: 800;
+	font-size: 22.4px;
+	line-height: 26px;
+	color: #FB8368;
+	display: flex;
+
+	.logoIcon {
+		background-color: #FB8368;
+		mask: url('/assets/person-pin.svg') no-repeat center;
+		display: inline-block;
+		width: 24px;
+		height: 28px;
 	}
 }
 
