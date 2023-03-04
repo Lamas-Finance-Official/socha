@@ -12,8 +12,6 @@ Overall, our web3 platform aims to make charitable giving more accessible, trans
 ## Pitch Deck:
 https://drive.google.com/file/d/1DMr5buS49P11FmlMI0vaNtg8OrH9bI1e/view?usp=sharing
 
-## Live Demo:
-https://socha.vercel.app/
-
-## Video Demo:
-https://youtu.be/uDfAZpRBvTk
+## Demo:
+- Live: https://socha.vercel.app/
+- Video Demo: https://youtu.be/uDfAZpRBvTk
