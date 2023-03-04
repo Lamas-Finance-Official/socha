@@ -13,6 +13,7 @@ export const CreateCampaign: FC = () => {
     const [name, setName] = useState('');
     const [overview, setOverview] = useState('');
     const [amount, setAmount] = useState(1000);
+    const [thumbnail, setThumbnail] = useState('/assets/upload.svg');
     const [endTime, setEndTime] = useState(
         formatISO(
             addDays(new Date(), 15),
@@ -23,6 +24,7 @@ export const CreateCampaign: FC = () => {
     const inputOverview = useRef<HTMLTextAreaElement>(null);
     const inputAmount = useRef<HTMLInputElement>(null);
     const inputDate = useRef<HTMLInputElement>(null);
+    const inputImages = useRef<HTMLInputElement>(null);
 
     const onChange = useCallback((e: any) => {
         if (e.target === inputName.current) {
@@ -34,6 +36,16 @@ export const CreateCampaign: FC = () => {
         } else if (e.target === inputDate.current) {
             setEndTime(e.target.value);
         }
+    }, []);
+
+    const onImage = useCallback(() => {
+        if (inputImages.current && inputImages.current.files) {
+            setThumbnail(URL.createObjectURL(inputImages.current.files![0]));
+        }
+    }, []);
+
+    const getImage = useCallback(() => {
+        inputImages.current?.click();
     }, []);
 
     const submit = useCallback(() => {
@@ -55,7 +67,8 @@ export const CreateCampaign: FC = () => {
         <div className='container'>
             <section className='page pageCreate'>
                 <div className='upload'>
-                    <img src="/assets/upload.svg" alt="upload button" />
+                    <input accept="image/*" type='file' ref={inputImages} onChange={onImage} style={{ display: 'none' }}></input>
+                    <img src={thumbnail} alt="upload button" onClick={getImage} />
                 </div>
                 <div className='content'>
                     <label className='labelName' htmlFor='inputName'>
@@ -78,7 +91,7 @@ export const CreateCampaign: FC = () => {
                 <div className='cards'>
                     <div className='card cardInput'>
                         <div>Raise amount</div>
-                        <div className='input'>
+                        <div className='input' onChange={onImage}>
                             <span>
                                 <input type="number" ref={inputAmount} onChange={onChange} value={amount} />
                                 <span>USDC</span>
