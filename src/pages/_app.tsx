@@ -3,6 +3,8 @@ import { Nunito } from 'next/font/google';
 import Layout from '~/components/Layout';
 
 import '~/styles/globals.scss';
+import '~/styles/home.scss';
+import '~/styles/create.scss';
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 const nunito = Nunito({

@@ -1,0 +1,138 @@
+.pageCreate {
+    display: flex;
+    background: #FEF6F0;    
+
+    .upload {
+        margin-left: 100px;
+        margin-top: 170px;
+
+        img {
+            width: 100%;
+            border-radius: 25px;            
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        margin-left: 100px;
+        margin-right: 50px;
+        margin-top: 170px;        
+
+        input, textarea {
+            background: transparent;
+            border: none;
+            width: 100%;
+        }
+
+        .labelName {
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 135%;
+            color: #9393A8;
+        }
+
+        .input {
+            margin-top: 12px;
+            margin-bottom: 20px;
+
+            display: flex;
+            flex-direction: row;
+            
+            &>span {
+                padding: 5px 12px 4px;
+                background: #FFDCCA;
+                border-radius: 25px;
+
+                font-size: 16px;
+                line-height: 24px;
+                color: #FB8368;
+                height: min-content;
+                width: max-content;
+            }
+        }
+
+        .labelOverview {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 24px;
+            color: #9393A8;
+        }
+    }
+}
+
+.pageCreateInfo {
+    display: flex;
+    flex-direction: column;
+    background: #FFFDFC;
+
+    .cards {
+        display: flex;
+        flex-direction: row;
+        margin-left: 100px;
+
+        .card {
+            height: 64px;
+
+            display: flex;
+            padding: 16px 24px 20px;
+            background: #FFFFFF;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.06);
+            border-radius: 20px;            
+            margin: 32px 12px;
+        }
+
+        .cardInput {
+            width: 300px;
+            
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+
+            flex-direction: row;
+            justify-content: space-between;
+
+            &>div:first-child {
+                align-self: flex-start;
+            }
+
+            .input {
+                align-self: flex-end;
+                color: #9393A8;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 24px;
+                text-align: right;
+            }
+
+            span > input {
+                width: 4em;
+            }
+
+            input {
+                text-align: right;
+                color: #9393A8;
+                border: none;
+                background: transparent;                
+                font-weight: 700;
+                font-size: 28px;
+                letter-spacing: 0.02em;                
+            }
+
+            button {
+                border: none;
+                background: transparent;                
+                text-decoration-line: underline;
+                font-feature-settings: 'salt' on;
+
+                color: #FB8368;
+            }
+        }
+
+        .card + .avatar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}
