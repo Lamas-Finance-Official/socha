@@ -43,7 +43,7 @@ export const Campaign: FC<{ pubkey: string }> = ({ pubkey }) => {
                 setAmount(0);
             })
         }
-    }, [amount, note, pubkey, publicKey]);
+    }, [amount, note, pubkey, publicKey, sochaActions]);
 
     if (!campaign) {
         return <div>Loading...</div>

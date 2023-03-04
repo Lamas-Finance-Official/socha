@@ -49,7 +49,7 @@ export const CreateCampaign: FC = () => {
                 router.push(`/campaign/${key}`);
             });
         }
-    }, [name, overview, amount, endTime, sochaActions]);
+    }, [name, overview, amount, endTime, sochaActions, router]);
 
     return (
         <div className='container'>
@@ -66,7 +66,7 @@ export const CreateCampaign: FC = () => {
                         <input type="text" ref={inputName} onChange={onChange} id='inputName' value={name} />
                     </div>
                     <label className='labelOverview' htmlFor='inputOverview'>
-                        Give an overview of your campaign's mission and vision here
+                        {`Give an overview of your campaign's mission and vision here`}
                     </label>
                     <div className='input'>
                         <span>{overview.length}/500</span>
@@ -100,7 +100,7 @@ export const CreateCampaign: FC = () => {
                         </div>
                     </div>
                     <div className='card avatar'>
-                        <Image src='/assets/avatar.png' alt='avatar' width={40} height={40}></Image>
+                        <Image src={'/assets/avatar.png'} alt='avatar' width={40} height={40}></Image>
                         <span>Seyite Sansi</span>
                     </div>
                 </div>
