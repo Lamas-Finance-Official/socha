@@ -9,4 +9,5 @@ In addition, each contributor will automatically have a charitable profile recor
 
 Overall, our web3 platform aims to make charitable giving more accessible, transparent, and efficient, leveraging the benefits of cryptocurrency and blockchain technology to create a more equitable world.
 
-## Pitch Deck:  https://drive.google.com/file/d/1DMr5buS49P11FmlMI0vaNtg8OrH9bI1e/view?usp=sharing
+## Pitch Deck:
+https://drive.google.com/file/d/1DMr5buS49P11FmlMI0vaNtg8OrH9bI1e/view?usp=sharing
