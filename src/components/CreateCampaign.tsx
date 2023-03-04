@@ -2,8 +2,14 @@ import { FC, useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Header } from './Header';
 import { addDays, formatISO } from 'date-fns';
+import { useSochaActions } from './common';
+import { useRouter } from 'next/router';
 
 export const CreateCampaign: FC = () => {
+    const router = useRouter();
+    const sochaActions = useSochaActions();
+    if (typeof window !== 'undefined') (window as any).$a = sochaActions;
+
     const [name, setName] = useState('');
     const [overview, setOverview] = useState('');
     const [amount, setAmount] = useState(1000);
@@ -28,11 +34,25 @@ export const CreateCampaign: FC = () => {
         } else if (e.target === inputDate.current) {
             setEndTime(e.target.value);
         }
-    }, [setName, setOverview])
+    }, []);
+
+    const submit = useCallback(() => {
+        if (sochaActions) {
+            sochaActions.createRound({
+                title: name,
+                summary: '',
+                description: overview,
+                thumbnail: '',
+                targetAmount: amount,
+                closeUnixTimestamp: new Date(endTime).getTime() / 1000,
+            }).then(key => {
+                router.push(`/campaign/${key}`);
+            });
+        }
+    }, [name, overview, amount, endTime, sochaActions]);
 
     return (
         <div className='container'>
-            <Header />
             <section className='page pageCreate'>
                 <div className='upload'>
                     <img src="/assets/upload.svg" alt="upload button" />
@@ -84,8 +104,8 @@ export const CreateCampaign: FC = () => {
                         <span>Seyite Sansi</span>
                     </div>
                 </div>
-                <div>
-                    <button>Publish your Campaign</button>
+                <div className='publish'>
+                    <button onClick={submit}>Publish your Campaign</button>
                 </div>
             </section>
         </div>

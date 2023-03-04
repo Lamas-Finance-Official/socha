@@ -1,0 +1,159 @@
+.pageCampaign {
+    display: flex;    
+    background: #FEF6F0;    
+
+    .image {
+        margin-left: 100px;
+        margin-top: 170px;
+        img {
+            border-radius: 25px;
+        }        
+    }
+
+    .content {
+        margin-left: 100px;
+        margin-right: 50px;
+        margin-top: 170px; 
+
+        display: flex;
+        flex-direction: column;
+
+        .labelName {
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 135%;
+            color: #9393A8;
+            margin-bottom: 24px;
+        }
+
+        .labelOverview {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 24px;
+            color: #9393A8;
+        }
+    }
+}
+
+.pageCampaignInfo {    
+    display: flex;
+    flex-direction: column;
+    background: #FFFDFC;
+
+    .cards {
+        display: flex;
+        flex-direction: row;
+        margin-left: 100px;
+
+
+        .card {
+            height: 64px;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 16px 24px 20px;
+            background: #FFFFFF;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.06);
+            border-radius: 20px;            
+            margin: 32px 12px;
+
+            
+        }
+
+        .progressBar {
+            background-color: rgb(0, 0, 0, 0.05);
+            border-radius: 25px;
+            height: 12px;
+            width: 100%;
+
+            &>div {
+                height: 100%;
+                background-color: #2DAC18;
+                border-radius: 25px;
+            }
+        }
+    }
+}
+
+.donate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 500px;
+    background: #FFFDFC;
+    
+
+    .smallQuote {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        color: #55556B;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        background-color: #FFFFFF;
+        box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.06);
+        border-radius: 20px;
+
+        .amount, .note {
+            display: flex;
+            background: #F7F8F9;
+            border-radius: 10px;
+
+            color: #472C6A;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+
+            margin-bottom: 8px;
+            padding: 12px 16px;
+        }
+
+        .amount {
+            flex-direction: row;
+            align-items: flex-end;
+        }
+
+        .note {
+            flex-direction: column;
+        }
+
+        input, textarea {
+            color: #472C6A;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            background-color: transparent;
+            border: none;       
+            margin-bottom: 4px;                 
+        }
+
+        .amount input {
+            font-size: 36px;
+            text-align: right;
+            margin-right: 4px;
+        }
+
+        .donateBtn {
+            background: #622EA6;
+            padding: 20px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 24px;
+            /* identical to box height, or 150% */
+
+            letter-spacing: 0.1px;
+            font-feature-settings: 'case' on;
+
+            /* White/White */
+
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+    }
+}

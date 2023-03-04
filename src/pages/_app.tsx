@@ -5,6 +5,7 @@ import Layout from '~/components/Layout';
 import '~/styles/globals.scss';
 import '~/styles/home.scss';
 import '~/styles/create.scss';
+import '~/styles/campaign.scss';
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 const nunito = Nunito({

@@ -1,85 +1,15 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { CampaignCard, ContributorCard, Logo, RaiseAFundBtn } from './common';
-import { Header } from './Header';
+import { CampaignCard, ContributorCard, RaiseAFundBtn, useTokenAccount } from './common';
+import { useConnection } from '@solana/wallet-adapter-react';
+import { getAllRounds, SochaCampaign } from '~/web3';
 
-// export const HomePage: FC = () => {
-// 	const { connection } = useConnection();
-// 	const { setVisible } = useWalletModal();
-// 	const { wallet, publicKey, signTransaction } = useWallet();
-
-// 	const walletConnected = Boolean(publicKey && wallet);
-// 	const connectWallet = useCallback(() => {
-// 		if (!walletConnected) {
-// 			setVisible(true);
-// 		}
-// 	}, [walletConnected, setVisible]);
-
-// 	const doAirdrop = useCallback(async () => {
-// 		try {
-// 			const tokenAccount = await getOrCreateAssociatedTokenAccount({
-// 				connection,
-// 				owner: publicKey!,
-// 				payer: publicKey!,
-// 				signTransaction: signTransaction!,
-// 			});
-
-// 			await requestAirdrop({
-// 				owner: publicKey!,
-// 				tokenAccount: tokenAccount.address,
-// 				connection,
-// 				signTransaction: signTransaction!,
-// 			});
-// 		} catch (err) {
-// 			console.log(err, (err as any).logs);
-// 		}
-// 	}, [publicKey, signTransaction, connection]);
-
-// 	return (
-// 		<>
-// 			<button onClick={connectWallet} disabled={walletConnected}>
-// 				Connect wallet
-// 			</button>
-// 			<button onClick={doAirdrop} disabled={!walletConnected}>
-// 				Airdrop
-// 			</button>
-// 		</>
-// 	);
-// };
 
 type Contributor = {
 	avatar: string;
 	name: string;
 	amount: number;
 };
-
-const campaigns: any[] = [
-	{
-		targetAmount: 4000,
-		currentAmount: 2500,
-		title: 'Help 4 woman of color attend a higher education in Africa',
-		thumbnail: '',
-	},
-	{
-		targetAmount: 4000,
-		currentAmount: 100,
-		title: 'Grant to fund reforestation in Agogo',
-		thumbnail: '',
-	},
-	{
-		targetAmount: 5000,
-		currentAmount: 2000,
-		title: 'Project proposal: develop AI chatbots to help prevent suicide',
-		thumbnail: '',
-	},
-	{
-		targetAmount: 5000,
-		currentAmount: 4400,
-		title: 'Grant proposal: pair a veteran with a service dog to treat PTSD',
-		thumbnail: '',
-	},
-];
 
 const contributors: Contributor[] = [
 	{
@@ -105,6 +35,14 @@ const contributors: Contributor[] = [
 ];
 
 export const HomePage: FC = () => {
+	const { connection } = useConnection();
+	const [campaigns, setCampaigns] = useState<SochaCampaign[]>([]);
+
+	useEffect(() => {
+		getAllRounds(connection)
+			.then(r => setCampaigns(r));
+	}, [connection]);
+
 	return (
 		<div className={'container'}>
 			<section className={'page page0'}>

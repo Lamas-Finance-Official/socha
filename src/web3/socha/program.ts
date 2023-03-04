@@ -27,7 +27,7 @@ export const sochaRound = (round: BN) =>
 	utils.publicKey.findProgramAddressSync(
 		[
 			Buffer.from('socha-round'),
-			round.toBuffer('be', 8),
+			round.toArrayLike(Buffer, 'be', 8),
 		],
 		SOCHA_PROGRAM_ID,
 	)[0];

@@ -1,12 +1,57 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { SochaCampaign } from '~/web3';
+import { getOrCreateAssociatedTokenAccount, SochaActions, SochaCampaign } from '~/web3';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { Account } from '@solana/spl-token';
 
 type Contributor = {
 	avatar: string;
 	name: string;
 	amount: number;
 };
+
+export const useTokenAccount = () => {
+	const { connection } = useConnection();
+	const { publicKey, signTransaction } = useWallet();
+	const [tokenAccount, setTokenAccount] = useState<null | Account>(null);
+
+	useEffect(() => {
+		if (publicKey && signTransaction) {
+			getOrCreateAssociatedTokenAccount({
+				connection,
+				owner: publicKey!,
+				payer: publicKey!,
+				signTransaction: signTransaction!,
+			})
+				.then(token => setTokenAccount(token));
+
+		}
+	}, [setTokenAccount, publicKey, connection, signTransaction]);
+
+	return tokenAccount;
+}
+
+export const useSochaActions = () => {
+	const [sochaActions, setSochaActions] = useState<null | SochaActions>(null);
+	const tokenAccount = useTokenAccount();
+	const { connection } = useConnection();
+	const { publicKey, signTransaction } = useWallet();
+
+	useEffect(() => {
+		if (tokenAccount && publicKey && signTransaction) {
+			const sochaActions = new SochaActions({
+				owner: publicKey,
+				tokenAccount: tokenAccount.address,
+				connection,
+				signTransaction,
+			});
+
+			setSochaActions(sochaActions);
+		}
+	}, [tokenAccount, publicKey, connection, signTransaction]);
+
+	return sochaActions;
+}
 
 export const Logo: FC = () => (
 	<Link href='/' className={'logo'}>
@@ -25,11 +70,11 @@ export const RaiseAFundBtn: FC = () => {
 };
 
 export const CampaignCard: FC<{ round: SochaCampaign }> = ({ round }) => (
-	<div className={'campaignCard'}>
+	<Link href={`/campaign/${round.pubkey}`} className={'campaignCard'}>
 		<img src={round.thumbnail} alt="campagin image" />
 		<div className={'content'}>
 			<div className={'title'}>{round.title}</div>
-			<div className={'pubkey'}>{`GNXBosvDTNNwAjNFHxoQP5CMrqtkyLohjETExdr84pQw`}</div>
+			<div className={'pubkey'}>{round.pubkey.toBase58()}</div>
 			<div className={'progressBar'}>
 				<div style={{ width: `${(round.currentAmount / round.targetAmount) * 100}%` }}></div>
 			</div>
@@ -40,7 +85,7 @@ export const CampaignCard: FC<{ round: SochaCampaign }> = ({ round }) => (
 			</div>
 			<div className={'footer'}>Last donation few days ago</div>
 		</div>
-	</div>
+	</Link>
 );
 
 export const ContributorCard: FC<{ contributor: Contributor }> = ({ contributor }) => (

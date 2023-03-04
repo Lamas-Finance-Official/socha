@@ -8,13 +8,13 @@ import { cx } from '~/lib/cx';
 
 const Layout: FunctionComponent<{ children: JSX.Element; className: string }> = ({ children, className }) => {
 	return (
-		<>
+		<Wallet>
 			<Head>
 				<title>Socha</title>
 			</Head>
 			<div className={cx(className, 'main')}>
 				<Header />
-				<Wallet>{children}</Wallet>
+				{children}
 				<footer className={'footer'}>
 					<div className={'nav'}>
 						<div className={'left'}>
@@ -56,7 +56,7 @@ const Layout: FunctionComponent<{ children: JSX.Element; className: string }> = 
 					</div>
 				</footer>
 			</div>
-		</>
+		</Wallet>
 	);
 };
 
