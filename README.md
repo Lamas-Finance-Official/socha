@@ -1,4 +1,4 @@
-# SOCHA - Web3 platform for charitable fundraising using blockchain & crypto
+# SOCHA - Web3 platform for charitable fundraising using blockchain to ensure authenticity and transparency
 
 ## Project Description:
 Our project is a web3 platform designed to facilitate charitable fundraising through cryptocurrency. With SoCha, users can create campaigns and add information about their charitable cause. Each campaign will be associated with a contract account, allowing for secure and transparent tracking of donations.
@@ -11,3 +11,9 @@ Overall, our web3 platform aims to make charitable giving more accessible, trans
 
 ## Pitch Deck:
 https://drive.google.com/file/d/1DMr5buS49P11FmlMI0vaNtg8OrH9bI1e/view?usp=sharing
+
+## Live Demo:
+https://socha.vercel.app/
+
+## Video Demo:
+upcoming
