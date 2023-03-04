@@ -1,5 +1,6 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { CampaignCard, ContributorCard, RaiseAFundBtn, useTokenAccount } from './common';
 import { useConnection } from '@solana/wallet-adapter-react';
 import { getAllRounds, SochaCampaign } from '~/web3';
@@ -58,7 +59,9 @@ export const HomePage: FC = () => {
 					</div>
 					<RaiseAFundBtn />
 				</div>
-				<div className={'graphic'}></div>
+				<div className={'graphic'}>
+					<Image src='/assets/home.png' alt='home' width={650} height={500} />
+				</div>
 			</section>
 			<section className={'page page1'}>
 				<div className={'bigQuote'}>Make the world better through charity</div>
@@ -67,7 +70,7 @@ export const HomePage: FC = () => {
 				</div>
 				<div className={'cards'}>
 					{campaigns.map((c) => (
-						<CampaignCard key={c.title} round={c} />
+						<CampaignCard key={c.pubkey.toBase58()} round={c} />
 					))}
 				</div>
 				<div>
