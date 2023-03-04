@@ -16,4 +16,4 @@ https://drive.google.com/file/d/1DMr5buS49P11FmlMI0vaNtg8OrH9bI1e/view?usp=shari
 https://socha.vercel.app/
 
 ## Video Demo:
-upcoming
+https://youtu.be/uDfAZpRBvTk
